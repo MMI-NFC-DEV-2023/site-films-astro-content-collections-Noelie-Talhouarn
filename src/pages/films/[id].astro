@@ -54,11 +54,10 @@ const roles =
     {
       roles && (
         <>
-          <h2>Acteurs</h2>
           <ul>
             {roles.map(({ role, acteur }) => (
               <li>
-                <strong>{role}</strong> : {acteur.data.nom}
+                <strong>{role}</strong> {acteur && <>: <a href={`/personne/${acteur.id}`}>{acteur.data.nom}</a></>}
               </li>
             ))}
           </ul>
