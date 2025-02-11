@@ -17,7 +17,7 @@ const { Content } = await render(personne);
 ---
 
 <Layout pageTitle={`Fiche de ${personne.data.nom}`}>
-  <h1>{personne.data.nom}</h1>
+  <h1 class="text-fuchsia-600">{personne.data.nom}</h1>
   <p>Nationalité : {personne.data.nationalite}</p>
   <p>Date de naissance : {formatDate(personne.data.dateNaissance)}</p>
   <p>Lieu de naissance : {personne.data.lieuNaissance}</p>
