@@ -7,6 +7,7 @@ nationalite: US
 profession:
   - acteur
   - realisateur
+  - producteur
 ---
 
 # Biographie de Mel Gibson

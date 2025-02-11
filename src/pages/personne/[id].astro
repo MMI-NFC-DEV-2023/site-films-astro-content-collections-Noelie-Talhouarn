@@ -33,7 +33,7 @@ const profession = personne.data.profession && [
   {
     profession && (
       <p>
-        Profession{profession.length > 1 && <>s</>} : {profession.join(", ")}
+        Profession{profession.length > 1 && <>s</>} : {profession.join(", ").replace(/,([^,]*)$/, ' et $1')}
       </p>
     )
   }

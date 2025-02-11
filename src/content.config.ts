@@ -15,4 +15,12 @@ const personne = defineCollection({
   }),
 });
 
-export const collections = { personne };
+const films = defineCollection({
+    loader: glob({ base: "src/data/films", pattern: "**/*.md" }),
+    schema: z.object({
+      titre: z.string(),
+      dateSortie: z.date(),
+    }),
+    });
+
+export const collections = { personne, films };
