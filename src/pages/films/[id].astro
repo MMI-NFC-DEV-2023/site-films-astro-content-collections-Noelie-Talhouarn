@@ -1,5 +1,6 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import { getEntries } from "astro:content";
 import { getEntry } from "astro:content";
 
 import { getCollection, render } from "astro:content";
@@ -16,14 +17,28 @@ export async function getStaticPaths() {
 const { films } = Astro.props;
 const { Content } = await render(films);
 
-const realisateur = films.data.realisateur && (await getEntry(films.data.realisateur));
+const realisateur =
+  films.data.realisateur && (await getEntry(films.data.realisateur));
+
+const scenaristes =
+  films.data.scenaristes && (await getEntries(films.data.scenaristes));
 ---
 
 <Layout pageTitle={`Fiche de ${films.data.titre}`}>
   <h1 class="text-fuchsia-600">{films.data.titre}</h1>
   <p>Date de sortie : {formatDate(films.data.dateSortie)}</p>
   {realisateur && <p>realisateur: {realisateur.data.nom}</p>}
-  
+  {
+    scenaristes && (
+      <p>
+        scenariste{scenaristes.length > 1 && <>s</>} :
+        {scenaristes
+          .map((s) => s.data.nom)
+          .join(", ")
+          .replace(/,([^,]*)$/, " et $1")}
+      </p>
+    )
+  }
 
   <div class="prose">
     <Content />
