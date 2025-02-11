@@ -6,10 +6,7 @@ dateDeces: 2020-09-15
 nationalite: US
 profession: 
 - acteur
+roles: adriana
 ---
 
-# Biographie de Mel Gibson
-
-- acteur
-- réalisateur
-- producteur
+#

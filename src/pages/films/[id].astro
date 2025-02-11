@@ -22,6 +22,15 @@ const realisateur =
 
 const scenaristes =
   films.data.scenaristes && (await getEntries(films.data.scenaristes));
+
+const roles =
+  films.data.roles &&
+  (await Promise.all(
+    films.data.roles.map(async (r) => ({
+      role: r.role,
+      acteur: await getEntry(r.acteur),
+    }))
+  ));
 ---
 
 <Layout pageTitle={`Fiche de ${films.data.titre}`}>
@@ -39,6 +48,24 @@ const scenaristes =
       </p>
     )
   }
+
+  <h2>Acteurs</h2>
+  <ul>
+    {
+      roles && (
+        <>
+          <h2>Acteurs</h2>
+          <ul>
+            {roles.map(({ role, acteur }) => (
+              <li>
+                <strong>{role}</strong> : {acteur.data.nom}
+              </li>
+            ))}
+          </ul>
+        </>
+      )
+    }
+  </ul>
 
   <div class="prose">
     <Content />
