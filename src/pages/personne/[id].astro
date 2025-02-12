@@ -18,6 +18,8 @@ const { Content } = await render(personne);
 const profession = personne.data.profession && [
   ...new Set(personne.data.profession),
 ];
+
+const filmsRealisateur = [...await getCollection("films")].filter(film => film.data?.realisateur?.id === personne.id);
 ---
 
 <Layout pageTitle={`Fiche de ${personne.data.nom}`}>

@@ -1,0 +1,17 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+const { personne } = Astro.props;
+
+interface Props {
+  personne: CollectionEntry<"personne">;
+}
+---
+
+{
+  personne ? (
+    <a href={`/personne/${personne.id}`}>{personne.data.nom}</a>
+  ) : (
+    <span>Personne introuvable</span>
+  )
+}
