@@ -1,4 +1,5 @@
 ---
+import LinkFilm from "@components/LinkFilm.astro";
 import Layout from "@layouts/Layout.astro";
 
 import { getCollection, render } from "astro:content";
@@ -19,7 +20,9 @@ const profession = personne.data.profession && [
   ...new Set(personne.data.profession),
 ];
 
-const filmsRealisateur = [...await getCollection("films")].filter(film => film.data?.realisateur?.id === personne.id);
+const filmsRealisateur = [...(await getCollection("films"))].filter(
+  (film) => film.data?.realisateur?.id === personne.id
+);
 ---
 
 <Layout pageTitle={`Fiche de ${personne.data.nom}`}>
@@ -35,10 +38,23 @@ const filmsRealisateur = [...await getCollection("films")].filter(film => film.d
   {
     profession && (
       <p>
-        Profession{profession.length > 1 && <>s</>} : {profession.join(", ").replace(/,([^,]*)$/, ' et $1')}
+        Profession{profession.length > 1 && <>s</>} :{" "}
+        {profession.join(", ").replace(/,([^,]*)$/, " et $1")}
       </p>
     )
   }
+
+  {
+    filmsRealisateur.length > 0 && (
+      <p class="text-lg text-gray-700">
+        <strong>Films réalisés :</strong>{" "}
+        {filmsRealisateur.map((film) => (
+          <LinkFilm {...film} />
+        ))}
+      </p>
+    )
+  }
+
   <div class="prose">
     <Content />
   </div>
